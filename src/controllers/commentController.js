@@ -128,8 +128,13 @@ const voteComment = async (req, res, next) => {
         await existingVote.deleteOne();
       } else {
         comment.voteScore += Number(value) * 2;
-        if (Number(value) === 1) { comment.upvotes += 1; comment.downvotes -= 1; }
-        else { comment.downvotes += 1; comment.upvotes -= 1; }
+        if (Number(value) === 1) {
+          comment.upvotes += 1;
+          comment.downvotes -= 1;
+        } else {
+          comment.downvotes += 1;
+          comment.upvotes -= 1;
+        }
         existingVote.value = Number(value);
         await existingVote.save();
       }

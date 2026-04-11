@@ -132,8 +132,13 @@ const votePost = async (req, res, next) => {
       } else {
         // Change vote
         post.voteScore += Number(value) * 2;
-        if (Number(value) === 1) { post.upvotes += 1; post.downvotes -= 1; }
-        else { post.downvotes += 1; post.upvotes -= 1; }
+        if (Number(value) === 1) {
+          post.upvotes += 1;
+          post.downvotes -= 1;
+        } else {
+          post.downvotes += 1;
+          post.upvotes -= 1;
+        }
         existingVote.value = Number(value);
         await existingVote.save();
       }

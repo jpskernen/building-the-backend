@@ -64,7 +64,11 @@ const updateCommunity = async (req, res, next) => {
       return res.status(403).json({ success: false, message: 'Not authorized' });
     }
     const { description, banner, icon, isPrivate, rules } = req.body;
-    Object.assign(community, { description, banner, icon, isPrivate, rules });
+    if (description !== undefined) community.description = description;
+    if (banner !== undefined) community.banner = banner;
+    if (icon !== undefined) community.icon = icon;
+    if (isPrivate !== undefined) community.isPrivate = isPrivate;
+    if (rules !== undefined) community.rules = rules;
     await community.save();
     res.json({ success: true, community });
   } catch (error) {
